@@ -2,6 +2,7 @@ package com.javarush.crivoi.quest.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,7 +46,15 @@ public class GameServlet extends HttpServlet {
         }
 
         String username = (String) session.getAttribute("user");
-        User user = UserRepository.findByUsername(username);
+        Optional<User> userOpt = UserRepository.findByUsername(username);
+
+        if (userOpt.isEmpty()) {
+            logger.warn("User '{}' not found in repository, redirecting to login", username);
+            resp.sendRedirect("login");
+            return;
+        }
+
+        User user = userOpt.get();
         logger.info("User '{}' retrieved from session", username);
 
         String nodeId = req.getParameter("nodeId");
