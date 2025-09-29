@@ -16,19 +16,37 @@
     </properties>
 
     <dependencies>
-        <!-- Servlet API (compile only, Tomcat provides it at runtime) -->
+        <!-- SERVLETS -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <version>6.0.0</version> <!-- Tomcat 10+ uses Jakarta 6 -->
             <scope>provided</scope>
         </dependency>
-    </dependencies>
-
+        <!-- FRONT -->
+	    <dependency>
+	        <groupId>org.webjars</groupId>
+	        <artifactId>bootstrap</artifactId>
+	        <version>5.3.2</version>
+	    </dependency>
+        
+        <!-- MAPPERS -->    
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.30</version> 
+		    <scope>provided</scope>
+        </dependency> 
+           
+        <!-- LOGGS -->
+        <!-- TESTS -->
+        
+	    </dependencies>
+    
     <build>
         <finalName>quest</finalName> <!-- The name of the generated WAR -->
         <plugins>
-            <!-- WAR packaging plugin -->
+			<!-- WAR packaging plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>

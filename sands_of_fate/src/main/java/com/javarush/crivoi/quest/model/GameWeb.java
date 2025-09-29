@@ -1,9 +1,8 @@
-package com.javarush.crivoi.quest.engine;
+package com.javarush.crivoi.quest.model;
 
 import java.util.Map;
 
 import com.javarush.crivoi.quest.builder.NodeFactory;
-import com.javarush.crivoi.quest.model.Node;
 
 public class GameWeb {
     private final Map<String, Node> nodes;
@@ -16,3 +15,4 @@ public class GameWeb {
         return nodes;
     }
 }
+

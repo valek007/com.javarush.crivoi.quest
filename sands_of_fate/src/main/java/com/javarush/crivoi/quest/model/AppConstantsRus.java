@@ -1,6 +1,6 @@
 package com.javarush.crivoi.quest.model;
 
-public interface AppConstants {
+public interface AppConstantsRus {
 
     interface Questions {
         String QUESTION_1 = "Ваш самолёт разбился посреди Сахары. Солнце палит нещадно. Что вы сделаете первым делом?";
@@ -42,5 +42,25 @@ public interface AppConstants {
         String ENDING_3 = "Оазис оказался настоящим! Свежая вода и финики дали вам силы, пока вас не нашли путешественники.";
         String ENDING_4 = "Жара и миражи оказались сильнее. Потерянный и обессиленный, вы стали добычей пустыни.";
     }
-}
+    
+    interface Presentation {
 
+        // Messages from the main menu
+        String WELCOME_MESSAGE = "Добро пожаловать в 'Пески Судьбы'!";
+        String MENU_START = "1. Начать новую игру";
+        String MENU_LOAD = "2. Загрузить игру";
+        String MENU_EXIT = "3. Выход";
+        
+        // Console messages
+        String GAME_STARTED = "Игра началась! Ваше приключение в пустыне начинается...";
+        String LOAD_GAME = "Загрузка сохранённой игры... (функция пока недоступна)";
+        String EXIT_MESSAGE = "Выход из игры. До свидания!";
+        String INVALID_INPUT = "Неверный выбор. Пожалуйста, попробуйте снова.";
+        
+        // Message to continue after finishing
+        String CONTINUE_OPTION = "Хотите вернуться в меню? yes/no";
+        
+        // Game over message
+        String GAME_OVER = "\nИгра окончена!";
+    }
+}

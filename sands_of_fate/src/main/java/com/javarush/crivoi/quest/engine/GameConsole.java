@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.javarush.crivoi.quest.builder.NodeFactory;
+import com.javarush.crivoi.quest.model.AppConstantsRus;
 import com.javarush.crivoi.quest.model.Node;
 import com.javarush.crivoi.quest.model.Option;
 
@@ -24,7 +25,7 @@ public class GameConsole {
 
      // if there are no options → end
         if (node.getOptions().isEmpty()) {
-            System.out.println("\nИгра окончена!");
+            System.out.println(AppConstantsRus.Presentation.GAME_OVER);
             return;
         }
 
@@ -37,7 +38,7 @@ public class GameConsole {
                     return;
                 }
             }
-            System.out.println("Неверный выбор, попробуйте ещё раз.");
+            System.out.println(AppConstantsRus.Presentation.INVALID_INPUT);
         }
     }
 }

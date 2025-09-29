@@ -1,0 +1,10 @@
+body {
+    background-image: url('../images/desert.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+}

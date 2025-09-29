@@ -3,6 +3,7 @@ package com.javarush.crivoi.quest.ui;
 import java.util.Scanner;
 
 import com.javarush.crivoi.quest.engine.GameConsole;
+import com.javarush.crivoi.quest.model.AppConstantsRus;
 
 public class Presentation {
     private GameConsole game = new GameConsole();
@@ -12,42 +13,41 @@ public class Presentation {
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 String input = scanner.nextLine();
-                if (input.equals("1")) {
-                    System.out.println("Игра началась! Ваше приключение в пустыне начинается...");
-                    game.startQuest(scanner);
-                    continueOption(scanner);
-                } else if (input.equals("2")) {
-                    System.out.println("Загрузка сохранённой игры... (функция пока недоступна)");
-                } else if (input.equals("3")) {
-                    System.out.println("Выход из игры. До свидания!");
-                    break;
-                } else {
-                    System.out.println("Неверный выбор. Пожалуйста, попробуйте снова.");
+                switch (input) {
+                    case "1":
+                        System.out.println(AppConstantsRus.Presentation.GAME_STARTED);
+                        game.startQuest(scanner);
+                        continueOption(scanner);
+                        break;
+                    case "2":
+                        System.out.println(AppConstantsRus.Presentation.LOAD_GAME);
+                        break;
+                    case "3":
+                        System.out.println(AppConstantsRus.Presentation.EXIT_MESSAGE);
+                        return;
+                    default:
+                        System.out.println(AppConstantsRus.Presentation.INVALID_INPUT);
                 }
             }
         }
     }
 
     private void menu() {
-        System.out.println("Добро пожаловать в 'Пески Судьбы'!");
-        System.out.println("1. Начать новую игру");
-        System.out.println("2. Загрузить игру");
-        System.out.println("3. Выход");
+        System.out.println(AppConstantsRus.Presentation.WELCOME_MESSAGE);
+        System.out.println(AppConstantsRus.Presentation.MENU_START);
+        System.out.println(AppConstantsRus.Presentation.MENU_LOAD);
+        System.out.println(AppConstantsRus.Presentation.MENU_EXIT);
     }
 
     private void continueOption(Scanner sc) {
-        System.out.println("Хотите вернуться в меню? yes/no");
+        System.out.println(AppConstantsRus.Presentation.CONTINUE_OPTION);
         String input = sc.nextLine();
         if (input.equalsIgnoreCase("yes")) {
             System.out.println("\n");
             menu();
         } else {
-            System.out.println("Выход из игры. До свидания!");
+            System.out.println(AppConstantsRus.Presentation.EXIT_MESSAGE);
             System.exit(0);
         }
-    }
-
-    public static void main(String[] args) {
-        new Presentation().runGame();
     }
 }
