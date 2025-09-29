@@ -3,8 +3,8 @@ package com.javarush.crivoi.quest.builder;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.javarush.crivoi.quest.model.Node;
-import com.javarush.crivoi.quest.model.Option;
+import com.javarush.crivoi.quest.model.game.Node;
+import com.javarush.crivoi.quest.model.game.Option;
 
 public class NodeBuilder {
     private String id;

@@ -1,4 +1,4 @@
-package com.javarush.crivoi.quest.model;
+package com.javarush.crivoi.quest.model.game;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

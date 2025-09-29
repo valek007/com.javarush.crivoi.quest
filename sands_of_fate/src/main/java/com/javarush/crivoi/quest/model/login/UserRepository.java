@@ -1,9 +1,7 @@
-package com.javarush.crivoi.quest.login.repository;
+package com.javarush.crivoi.quest.model.login;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.javarush.crivoi.quest.login.model.User;
 
 public class UserRepository {
     private static final Map<String, User> users = new HashMap<>();

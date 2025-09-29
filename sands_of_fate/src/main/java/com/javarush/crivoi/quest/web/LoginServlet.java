@@ -3,8 +3,8 @@ package com.javarush.crivoi.quest.web;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import com.javarush.crivoi.quest.login.model.User;
-import com.javarush.crivoi.quest.login.repository.UserRepository;
+import com.javarush.crivoi.quest.model.login.User;
+import com.javarush.crivoi.quest.model.login.UserRepository;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,17 +13,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html; charset=UTF-8");
 
         String message = (String) req.getAttribute("message");
-        String alertType = (String) req.getAttribute("alertType"); // e.g., "danger", "success"
+        String alertType = (String) req.getAttribute("alertType"); 
 
         try (PrintWriter out = resp.getWriter()) {
             out.println("<!DOCTYPE html>");
@@ -32,18 +36,15 @@ public class LoginServlet extends HttpServlet {
             out.println("<link href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css' rel='stylesheet'>");
             out.println("</head><body>");
 
-            // Main container with same card style as game
             out.println("<div class='container mt-5'>");
             out.println("<div class='card mx-auto shadow p-4' style='max-width: 500px;'>");
 
             out.println("<h2 class='mb-4 text-center'>Login or Register</h2>");
 
-            // Display alert if message is available
             if (message != null && alertType != null) {
                 out.printf("<div class='alert alert-%s'>%s</div>", alertType, message);
             }
 
-            // Login/Register form inside the same card
             out.println("<form method='post'>");
             out.println("<input type='text' name='username' class='form-control mb-3' placeholder='Username' required>");
             out.println("<input type='password' name='password' class='form-control mb-3' placeholder='Password' required>");
@@ -53,11 +54,11 @@ public class LoginServlet extends HttpServlet {
             out.println("</div>");
             out.println("</form>");
 
-            out.println("</div></div>"); // Close card + container
-
+            out.println("</div></div>"); 
             out.println("<script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js'></script>");
             out.println("</body></html>");
         }
+        logger.info("Displayed login page");
     }
 
     @Override
@@ -69,22 +70,24 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
 
         if ("register".equals(action)) {
-            // Try to register a new user
             if (UserRepository.register(username, password)) {
                 session.setAttribute("user", username);
+                logger.info("User '{}' registered successfully", username);
                 resp.sendRedirect("game");
             } else {
+                logger.warn("Registration failed: user '{}' already exists", username);
                 req.setAttribute("message", "⚠️ User already exists!");
                 req.setAttribute("alertType", "warning");
                 doGet(req, resp);
             }
         } else if ("login".equals(action)) {
-            // Try to log in
             User user = UserRepository.login(username, password);
             if (user != null) {
                 session.setAttribute("user", username);
+                logger.info("User '{}' logged in successfully", username);
                 resp.sendRedirect("game");
             } else {
+                logger.warn("Failed login attempt for user '{}'", username);
                 req.setAttribute("message", "❌ Invalid credentials!");
                 req.setAttribute("alertType", "danger");
                 doGet(req, resp);

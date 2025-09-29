@@ -3,8 +3,8 @@ package com.javarush.crivoi.quest.builder;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.javarush.crivoi.quest.model.AppConstantsRus;
-import com.javarush.crivoi.quest.model.Node;
+import com.javarush.crivoi.quest.model.game.AppConstantsRus;
+import com.javarush.crivoi.quest.model.game.Node;
 
 public class NodeFactory {
 	
